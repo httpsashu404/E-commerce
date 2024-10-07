@@ -1,6 +1,6 @@
 import express from 'express'
 import { Authenticated } from '../Meddleware/auth.js'
-import { login, Profile, register, users } from '../controllers/user.js'
+import { login, Profile, register, users } from '../Controllers/user.js'
 
 const router = express.Router()
 
