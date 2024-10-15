@@ -13,7 +13,6 @@ router.post('/verify-payment', Verify)
 // user order
 router.get('/userorder', Authenticated, userOrder)
 
-
 // all orders
 router.get('/orders', allOrders)
 
