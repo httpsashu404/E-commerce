@@ -4,13 +4,13 @@ import bcrypt from 'bcryptjs'
 
 // Register user
 export const register = async (req, res) => {
-    const { name, email, password } = req.body
+    const { name, email, phone, password } = req.body
     try {
-        let user = await User.findOne({ email })
+        let user = await User.find({ email } || { phone })
         if (user) return res.json({ message: 'User Already exist', success: true })
         const hashPass = await bcrypt.hash(password, 10)
-        user = await User.create({ name, email, password: hashPass })
-        res.json({ message: "User resgister successfully!", user, success: true })
+        user = await User.create({ name, email, phone, password: hashPass })
+        res.json({ message: "User resgister successfully", user, success: true })
     } catch (error) {
         res.json({ message: error.message })
     }
@@ -32,6 +32,22 @@ export const login = async (req, res) => {
         })
 
         res.json({ message: `Welcome ${user.name}`, token, success: true })
+    } catch (error) {
+        res.json({ message: error.message })
+    }
+}
+
+// forget user password
+export const forgetPass = async (req, res) => {
+    const { email, password } = req.body
+    try {
+        let user = await User.findOne({ email })
+        if (!user)
+            return res.json({ message: "User doesn't exist", success: false })
+        const hashPass = await bcrypt.hash(password, 10)
+        user = await User.findOneAndUpdate({ email: email }, { password: hashPass })
+        res.json({ message: "Password reset successfully", user, success: true })
+
     } catch (error) {
         res.json({ message: error.message })
     }

@@ -40,7 +40,7 @@ export const Verify = async (req, res) => {
 // user order
 export const userOrder = async (req, res) => {
     let userId = res.user._id.toString()
-    let orders = await Payment.find(userId).sort({ orderDate: -1 })
+    let orders = await Payment.find({userId}).sort({ orderDate: -1 })
     res.json(orders)
 }
 
