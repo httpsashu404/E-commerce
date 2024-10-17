@@ -5,8 +5,14 @@ import bcrypt from 'bcryptjs'
 // Register user
 export const register = async (req, res) => {
     const { name, email, phone, password } = req.body
+    const query = {
+        $or: [
+            { email: email },
+            { phone: phone }
+        ]
+    }
     try {
-        let user = await User.find({ email } || { phone })
+        let user = await User.findOne(query)
         if (user) return res.json({ message: 'User Already exist', success: true })
         const hashPass = await bcrypt.hash(password, 10)
         user = await User.create({ name, email, phone, password: hashPass })
@@ -40,6 +46,7 @@ export const login = async (req, res) => {
 // forget user password
 export const forgetPass = async (req, res) => {
     const { email, password } = req.body
+    console.log(req.body)
     try {
         let user = await User.findOne({ email })
         if (!user)
