@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'express'
 import cors from 'cors'
+import adminRouter from './Routes/admin.js'
 import userRouter from './Routes/user.js'
 import productRouter from './Routes/product.js'
 import cartRouter from './Routes/cart.js'
@@ -29,6 +30,9 @@ try {
 app.get('/', (req, res) => {
     res.json({ message: 'Hello Developers' })
 })
+
+// admin Router
+app.use('/api/admin', adminRouter)
 
 // user Router
 app.use('/api/user', userRouter)
