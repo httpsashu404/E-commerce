@@ -10,6 +10,7 @@ It's complete e-commerce website with admin panel and payment gateway using MERN
   <li>Filter by category</li>
   <li>Filter by price</li>
   <li>Cart</li>  
+  <li>Search item</li>
   <li>Increase item</li>
   <li>Decrease item</li>
   <li>Payment Gateway</li>
