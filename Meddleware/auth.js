@@ -14,6 +14,4 @@ export const Authenticated = async (req, res, next) => {
         return res.json({ message: 'User not exist' })
     res.user = user
     next()
-
-    // console.log(decoded)
 }

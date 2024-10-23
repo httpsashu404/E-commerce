@@ -1,6 +1,6 @@
 import express from 'express'
-// import { Authenticated } from '../Meddleware/auth.js'
-import { forgetPass, login, register } from '../Controllers/admin.js'
+import { Authenticated } from '../Meddleware/adminAuth.js'
+import { forgetPass, login, Profile, register } from '../Controllers/admin.js'
 
 const router = express.Router()
 
@@ -12,6 +12,9 @@ router.post('/login', login)
 
 // forget password
 router.put('/forgetPass', forgetPass)
+
+// Admin profile
+router.get('/profile', Authenticated, Profile)
 
 
 export default router

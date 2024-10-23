@@ -16,10 +16,10 @@ export const register = async (req, res) => {
     }
     try {
         let admin = await Admin.findOne(query)
-        if (admin) return res.json({ message: 'User Already exist', success: false })
+        if (admin) return res.json({ message: 'Admin Already exist', success: false })
         const hashPass = await bcrypt.hash(password, 10)
         admin = await Admin.create({ name, email, phone, password: hashPass })
-        res.json({ message: "User resgister successfully", admin, success: true })
+        res.json({ message: "Admin resgister successfully", admin, success: true })
     } catch (error) {
         res.json({ message: error.message })
     }
@@ -61,3 +61,10 @@ export const forgetPass = async (req, res) => {
         res.json({ message: error.message })
     }
 }
+
+// get profile
+export const Profile = async (req, res) => {
+    let admin = res.admin
+    res.json({ admin })
+}
+
